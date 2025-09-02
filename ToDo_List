@@ -1,0 +1,82 @@
+import java.util.Arrays;
+
+public class ToDo_List {
+
+    private Task[] data;
+    private static int default_size = 10;
+    private int size = 0;
+
+    public ToDo_List(){
+        this.data = new Task[default_size];
+    }
+
+    public void addTask(String newTask){
+        Task task = new Task(newTask);
+        if(isFull()){
+            resize();
+        }
+        data[size++] = task;
+    }
+
+    // checking the list is full or not
+    public boolean isFull(){
+        return size == data.length;
+    }
+
+    private void resize(){
+        Task[] temp = new Task[data.length * 2];
+        // copying elements to array of double the size
+        for(int i=0;i<data.length;i++)
+            temp[i] = data[i];
+        data = temp;
+    }
+
+    public Task removeTask(int index) throws Exception{
+        if(index >= 0 && index < size){
+            Task temp = data[index];
+            for(int i=index;i<size -1;i++){
+                data[i] = data[i+1];
+            }
+            data[size -1] = null;
+            size--;
+            System.out.println("Task is removed");
+            return temp;
+        }
+        else
+        throw new Exception("Invalid index");
+    }
+
+    public Task get(int index) throws Exception{
+        if(index < 0 || index >= size){
+            throw new Exception("Invalid index");
+        }
+        return data[index];
+    }
+
+    public void markTaskCompleted(int index){
+        if(index >= 0 && index < size){
+            data[index].markCompleted();
+            System.out.println("Task marked as completed");
+        }
+        else{
+            System.out.println("Invalid task index");
+        }
+    }
+
+    public void display(){
+        if(isEmpty()){
+            System.out.println("No Task to show");
+        }
+        else{
+            for(int i=0;i<size;i++){
+                System.out.println(i+1 +". "+ data[i].toString());
+            }
+        }
+    }
+
+    // checking the list is empty or not
+    public boolean isEmpty(){
+        return size == 0;
+    }
+
+}

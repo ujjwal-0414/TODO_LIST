@@ -1,0 +1,70 @@
+import java.util.Scanner;
+
+public class Main{
+
+    public static void main(String args[]){
+        ToDo_List list = new ToDo_List();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("    Welcome to TO DO LIST    ");   
+
+        while(true){
+            display();
+            try{
+
+            int choice = sc.nextInt();
+            switch(choice){
+
+                case 1 :
+                System.out.println("Enter Task Description");
+                String describe = sc.nextLine();
+                Task task = new Task(describe);
+                list.addTask(describe);
+                System.out.println("Task added");
+                break;
+
+                case 2 :
+                System.out.println("    My Tasks    ");
+                list.display();
+                break;
+
+                case 3 : 
+                System.out.println("Enter the index of the task to mark as completed");
+                int index = sc.nextInt();
+                list.markTaskCompleted(index - 1);
+                break;
+
+                case 4 :
+                System.out.println("Enter the index of the task to remove");
+                int in = sc.nextInt();
+                list.removeTask(in - 1);
+                break;
+
+                case 5 :
+                System.out.println("    Thank You    ");
+                return;
+
+                default : 
+                System.out.println("Entered choice is invalid");
+                break;
+
+            }
+
+            } 
+            catch (Exception e) {
+                System.out.println("An error occurred. Please ensure you enter a valid number.");
+        }
+    }
+
+    private static void display(){
+        System.out.println("Please choose an option : ");
+        System.out.println("1. Add a new task");
+        System.out.println("2. View all Tasks");
+        System.out.println("3. Mark Task as completed");
+        System.out.println("4. Remove a Task");
+        System.out.println("5. Exit");
+        System.out.println("Enter your choice : ");
+    }
+
+}
++
+}
