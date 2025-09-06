@@ -12,6 +12,7 @@ public class Main{
             try{
 
             int choice = sc.nextInt();
+            sc.nextLine(); //consume leftover line
             switch(choice){
 
                 case 1 :
